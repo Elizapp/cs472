@@ -1,2 +1,2 @@
 # cs472
-# You could see some of the assigment made for WAP class.
+Here you'll find some of the assigment I have made for WAP class.
