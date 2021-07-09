@@ -13,7 +13,7 @@ function getNumber(inpts) {
     if(inpts == 'stop'){
         console.log('Total: ' + s);
         readl.close();
-           //1 process.exit(0);
+           // process.exit(0);
     }
 }
 
