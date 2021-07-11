@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<body>
+    <header><h1>Welcome to Shopping</h1></header>
+    <section>
+        <h2>Products</h2>
+        <div class="content-car">
+            <% for (const item of products) { %>
+                <div class="item">
+                    <h3> <%= item.name %></h3>
+                    <p>Price: US$ <%= item.price %></p>
+                    <p>Description: <%= item.description %></p>
+                    <form action="/addToCart" method="post">
+                        <input name="id" type="hidden" value="<%= item.id %>">
+                        <input name="name" type="hidden" value="<%= item.name %>">
+                        <input name="price" type="hidden" value="<%= item.price %>">
+                        <input name="description" type="hidden" value="<%= item.description %>">
+                        <button name="submit">Add to Cart</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </section>
+    <%- include('partials/aside') %>
+    <%- include('partials/footer') %>
