@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
     });
 });
 
-let carShoppingProducts = [];
+ session.carShoppingProducts = [];
 
 app.post('/addToCart/prod/1', (req, res) => {
     let count = req.session.views['/addToCart/prod/1'];
@@ -43,13 +43,13 @@ app.post('/addToCart/prod/1', (req, res) => {
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count});
+        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count});
     }else{
-        carShoppingProducts[0].price = parseFloat(req.body.price) * count;
-        carShoppingProducts[0].quantity = count;
+        session.carShoppingProducts[0].price = parseFloat(req.body.price) * count;
+        session.carShoppingProducts[0].quantity = count;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: carShoppingProducts,
+        carShoppingProducts: session.carShoppingProducts,
     });
 });
 app.post('/addToCart/prod/2', (req, res) => {
@@ -59,13 +59,13 @@ app.post('/addToCart/prod/2', (req, res) => {
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count2});
+        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count2});
     }else{
-        carShoppingProducts[1].price = parseFloat(req.body.price) * count2;
-        carShoppingProducts[1].quantity = count2;
+        session.carShoppingProducts[1].price = parseFloat(req.body.price) * count2;
+        session.carShoppingProducts[1].quantity = count2;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: carShoppingProducts,
+        carShoppingProducts: session.carShoppingProducts,
     });
 });
 app.post('/addToCart/prod/3', (req, res) => {
@@ -75,13 +75,13 @@ app.post('/addToCart/prod/3', (req, res) => {
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count3});
+        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count3});
     }else{
-        carShoppingProducts[2].price = parseFloat(req.body.price) * count3;
-        carShoppingProducts[2].quantity = count3;
+        session.carShoppingProducts[2].price = parseFloat(req.body.price) * count3;
+        session.carShoppingProducts[2].quantity = count3;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: carShoppingProducts,
+        carShoppingProducts: session.carShoppingProducts,
     });
 });
 app.listen(3000);
