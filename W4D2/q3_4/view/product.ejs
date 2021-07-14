@@ -1,4 +1,3 @@
-var session = require("express-session");
 <%- include('partials/header') %>
 <body>
     <header><h1>Welcome to Shopping</h1></header>
@@ -10,11 +9,11 @@ var session = require("express-session");
                     <h3> <%= item.name %></h3>
                     <p>Price: US$ <%= item.price %></p>
                     <p>Description: <%= item.description %></p>
-                    <form action="/addToCart/prod/<%=item.id%>" method="post">
-                        <input name="id" type="hidden" value="<%= item.id %>">
-                        <input name="name" type="hidden" value="<%= item.name %>">
-                        <input name="price" type="hidden" value="<%= item.price %>">
-                        <input name="description" type="hidden" value="<%= item.description %>">
+                    <form class="addProduct">
+                        <input class="id" name="id" type="hidden" value="<%= item.id %>">
+                        <input class="name" name="name" type="hidden" value="<%= item.name %>">
+                        <input class="price" name="price" type="hidden" value="<%= item.price %>">
+                        <input class="description" name="description" type="hidden" value="<%= item.description %>">
                         <button name="submit">Add to Cart</button>
                     </form>
                 </div>

@@ -1,18 +1,9 @@
-<%- include('partials/header') %>
-<body>
-<header><h1>Welcome to Shopping</h1></header>
-<section>
-    <h2>Items in you Cart</h2>
-    <p><a href="/"><<  Continuing shopping</a></p>
-    <div class="content-car">
+
+    <h2>Items in you Cart (<%=total %>)</h2>
         <% for (const item of carShoppingProducts) { %>
             <div class="item">
                 <h3>Q: (<%= item.quantity %>) <%= item.name %> </h3>
                 <p>Price: US$ <%= item.price %></p>
-                <p>Description: <%= item.description %></p>
             </div>
         <% } %>
-    </div>
-</section>
-<%- include('partials/aside') %>
-<%- include('partials/footer') %>
+

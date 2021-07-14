@@ -8,6 +8,9 @@ app.use(express.urlencoded({extended: false}));
 var parseurl = require('parseurl')
 var session = require('express-session')
 
+app.use(express.json());
+app.use('/js', express.static(path.join(__dirname, 'js')));
+
 app.use(session({
     resave: false, // don't save session if unmodified
     saveUninitialized: false, // don't create session until something stored
@@ -34,54 +37,68 @@ app.get('/', (req, res) => {
     });
 });
 
- session.carShoppingProducts = [];
+app.use((req, res, next) => {
+    if (!req.session.carShoppingProducts) {
+        req.session.carShoppingProducts = [];
+        req.session.total = 0;
+    }
+    next();
+});
+
+ //session.carShoppingProducts = [];
 
 app.post('/addToCart/prod/1', (req, res) => {
     let count = req.session.views['/addToCart/prod/1'];
+    req.session.total += 1;
     if(count <= 1){
         let name = req.body.name;
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count});
+        req.session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count});
     }else{
-        session.carShoppingProducts[0].price = parseFloat(req.body.price) * count;
-        session.carShoppingProducts[0].quantity = count;
+        req.session.carShoppingProducts[0].price = parseFloat(req.body.price) * count;
+        req.session.carShoppingProducts[0].quantity = count;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: session.carShoppingProducts,
+        carShoppingProducts: req.session.carShoppingProducts,
+        total: req.session.total,
     });
 });
 app.post('/addToCart/prod/2', (req, res) => {
     let count2 = req.session.views['/addToCart/prod/2'];
+    req.session.total += 1;
     if(count2 <= 1){
         let name = req.body.name;
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count2});
+        req.session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count2});
     }else{
-        session.carShoppingProducts[1].price = parseFloat(req.body.price) * count2;
-        session.carShoppingProducts[1].quantity = count2;
+        req.session.carShoppingProducts[1].price = parseFloat(req.body.price) * count2;
+        req.session.carShoppingProducts[1].quantity = count2;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: session.carShoppingProducts,
+        carShoppingProducts: req.session.carShoppingProducts,
+        total: req.session.total,
     });
 });
 app.post('/addToCart/prod/3', (req, res) => {
     let count3 = req.session.views['/addToCart/prod/3'];
+    req.session.total += 1;
     if(count3 <= 1){
         let name = req.body.name;
         let id = req.body.id;
         let price = req.body.price;
         let description = req.body.description;
-        session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count3});
+        req.session.carShoppingProducts.push({"id": id, "name": name, "price": price, "description": description, "quantity": count3});
     }else{
-        session.carShoppingProducts[2].price = parseFloat(req.body.price) * count3;
-        session.carShoppingProducts[2].quantity = count3;
+        req.session.carShoppingProducts[2].price = parseFloat(req.body.price) * count3;
+        req.session.carShoppingProducts[2].quantity = count3;
     }
     res.render("shoppingcart", {
-        carShoppingProducts: session.carShoppingProducts,
+        carShoppingProducts: req.session.carShoppingProducts,
+        total: req.session.total,
     });
 });
 app.listen(3000);
