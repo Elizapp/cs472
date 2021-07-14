@@ -1,5 +1,4 @@
 $(() => {
-    const clearMsg = () => $("#msg").text("");
     const addedSuccess = (res) => {
         $("aside").html(res);
         console.log(res)
